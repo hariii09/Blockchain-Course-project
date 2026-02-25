@@ -99,7 +99,7 @@ describe("HealthVault", function () {
       1
     );
 
-    // Move time forward
+    
     await ethers.provider.send("evm_increaseTime", [2]);
     await ethers.provider.send("evm_mine");
 
