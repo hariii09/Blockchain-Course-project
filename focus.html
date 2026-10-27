@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Focus – Life Hub</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="sb" class="side"></div><main><h1>Focus Session</h1><p class="sub">Stay on one thing at a time.</p>
+<div class="grid" style="grid-template-columns:2fr 1fr;gap:32px"><div><h3>Focus Scene</h3><div class="ph" style="height:330px"></div>
+<div class="timer" id="tm">25:00</div><p style="display:flex;gap:16px;margin:0"><button class="btn" id="st">Start</button><button class="btn o" id="rs">Reset</button></p></div>
+<div><h3>Up Next</h3><div class="ph" style="height:190px"></div><div id="qu" style="margin-top:16px"></div></div></div></main>
+<div id="toast"></div><script src="app.js"></script>
+<script>
+const Q=[['Deep Work',25],['Short Break',5],['Deep Work',25]];let i=0,left=Q[0][1]*60,h=null;
+const f=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function draw(){$('#tm').textContent=f(left);document.title=f(left)+' – Life Hub';$('#st').textContent=h?'Pause':'Start';
+$('#qu').innerHTML=Q.map((q,k)=>`<div class="q ${k==i?'on':''}" data-k="${k}"><span>${q[0]}</span><span class="mut">${q[1]} min</span></div>`).join('')}
+function stop(){clearInterval(h);h=null}
+function sel(k){stop();i=k;left=Q[k][1]*60;draw()}
+$('#st').onclick=()=>{if(h){stop();draw();return}
+h=setInterval(()=>{if(--left<=0){stop();if(Q[i][0]=='Deep Work'){S.focusMin+=Q[i][1];save()}toast(Q[i][0]+' complete');sel((i+1)%Q.length)}else draw()},1000);draw()};
+$('#rs').onclick=()=>sel(i);$('#qu').onclick=e=>{const q=e.target.closest('.q');q&&sel(+q.dataset.k)};draw();
+</script></body></html>

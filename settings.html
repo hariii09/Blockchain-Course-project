@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Settings – Life Hub</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="sb" class="side"></div><main><h1>Settings</h1><p class="sub">Manage your account and preferences.</p>
+<h3>Profile</h3><div class="card" style="padding:0;margin-bottom:28px"><div class="row">Name<input id="n"></div><div class="row">Email<input id="m" type="email"></div><div class="row">Password<input id="p" type="password" placeholder="Change"></div></div>
+<h3>Preferences</h3><div class="card" style="padding:0"><div class="row">Notifications<button class="tog" id="nt"></button></div>
+<div class="row">Theme<select id="th"><option>Light</option><option>Dark</option></select></div>
+<div class="row">Language<select id="lg"><option>English</option><option>Hindi</option><option>Tamil</option></select></div></div>
+<div class="err" id="er"></div><button class="btn" id="sv">Save Changes</button></main>
+<div id="toast"></div><script src="app.js"></script>
+<script>
+$('#n').value=S.name;$('#m').value=S.email;$('#th').value=S.theme;$('#lg').value=S.lang;let nf=S.notif;tog($('#nt'),nf,v=>nf=v);
+$('#sv').onclick=()=>{const m=$('#m').value.trim(),p=$('#p').value;
+if(!$('#n').value.trim())return $('#er').textContent='Name cannot be empty.';
+if(!/^\S+@\S+\.\S+$/.test(m))return $('#er').textContent='Enter a valid email address.';
+if(p&&p.length<6)return $('#er').textContent='Password must be at least 6 characters.';
+$('#er').textContent='';Object.assign(S,{name:$('#n').value.trim(),email:m,notif:nf,theme:$('#th').value,lang:$('#lg').value});if(p)S.pw=p;
+save();apply();sidebar();$('#p').value='';toast('Settings saved')};
+</script></body></html>

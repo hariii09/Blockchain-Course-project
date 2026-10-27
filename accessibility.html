@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Accessibility – Life Hub</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="sb" class="side"></div><main><h1>Accessibility</h1><p class="sub">Make Life Hub comfortable for you.</p>
+<div class="grid g3">
+<div><h3>Text Size</h3><div class="ph" style="height:340px"></div><p class="mut" style="font-size:.85rem">Adjust font size across the app</p><button class="tog" id="a1"></button></div>
+<div><h3>Contrast</h3><div class="ph" style="height:340px"></div><p class="mut" style="font-size:.85rem">Switch to high contrast colours</p><button class="tog" id="a2"></button></div>
+<div><h3>Voice Control</h3><div class="ph" style="height:340px"></div><p class="mut" style="font-size:.85rem">Navigate hands-free. Say “Dashboard”, “Focus”, “Settings”.</p><button class="tog" id="a3"></button></div></div></main>
+<div id="toast"></div><script src="app.js"></script>
+<script>
+tog($('#a1'),S.big,v=>{S.big=v;save();apply()});tog($('#a2'),S.hc,v=>{S.hc=v;save();apply()});
+tog($('#a3'),S.voice,v=>{if(v&&!(window.SpeechRecognition||window.webkitSpeechRecognition)){$('#a3').setAttribute('aria-checked',false);return toast('Voice control isn’t supported in this browser')}S.voice=v;save();if(v){voice();toast('Listening…')}else location.reload()});
+</script></body></html>

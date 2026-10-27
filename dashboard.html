@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard – Life Hub</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="sb" class="side"></div><main><h1>Dashboard</h1><p class="sub">Your day at a glance.</p>
+<div class="grid g4"><div class="card stat"><small>Tasks Done</small><b id="s1"></b></div><div class="card stat"><small>Focus Time</small><b id="s2"></b></div><div class="card stat"><small>Habit Streak</small><b>14 days</b></div><div class="card stat"><small>Sleep</small><b>7h 30m</b></div></div>
+<div class="grid g2" style="margin-top:24px"><div class="card"><h2>Today’s Tasks</h2><div id="tk"></div></div>
+<div class="card"><h2>Weekly Progress</h2><div class="ph" style="height:190px"></div><div id="wk" style="margin-top:16px"></div></div></div></main>
+<div id="toast"></div><script src="app.js"></script>
+<script>
+const N=['Morning workout','Finish assignment','Read 20 pages','Plan tomorrow'],W=[['Mon',80],['Tue',65],['Wed',90]];
+function draw(){const n=S.tasks.filter(Boolean).length;$('#s1').textContent=n+' / '+N.length;$('#s2').textContent=fmt(S.focusMin);
+$('#tk').innerHTML=N.map((t,i)=>`<label class="task ${S.tasks[i]?'d':''}"><input type="checkbox" data-i="${i}" ${S.tasks[i]?'checked':''}><span>${t}</span></label>`).join('');
+$('#wk').innerHTML=W.concat([['Today',Math.round(n/N.length*100)]]).map(([d,v])=>`<div class="q" style="cursor:default"><span>${d}</span><b style="color:var(--ac)">${v}%</b></div>`).join('')}
+$('#tk').onchange=e=>{S.tasks[e.target.dataset.i]=e.target.checked;save();draw()};draw();
+</script></body></html>

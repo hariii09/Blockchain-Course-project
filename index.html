@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Welcome – Life Hub</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="sb" class="side"></div><main>
+<h1>Welcome to Life Hub</h1><p class="sub">Your habits, focus and wellbeing in one place.</p>
+<div class="ph" style="height:420px"></div>
+<p style="margin-top:28px;display:flex;gap:16px"><button class="btn" id="go">Get Started</button><button class="btn o" id="tour">Take a Tour</button></p></main>
+<dialog id="dl"><h2 id="dt"></h2><p class="mut" id="dd"></p><p style="display:flex;justify-content:space-between;margin:24px 0 0"><span class="mut" id="dn"></span><button class="btn" id="nx">Next</button></p></dialog>
+<div id="toast"></div><script src="app.js"></script>
+<script>
+const T=[['Dashboard','See your tasks, focus time and weekly progress at a glance.'],['Focus','Run a timed focus session and work through your queue.'],['Settings','Update your profile and preferences.'],['Accessibility','Adjust text size, contrast and voice control.']];let i=0;
+const d=$('#dl'),show=()=>{$('#dt').textContent=T[i][0];$('#dd').textContent=T[i][1];$('#dn').textContent=(i+1)+' / '+T.length;$('#nx').textContent=i==T.length-1?'Done':'Next'};
+$('#go').onclick=()=>location.href='login.html';$('#tour').onclick=()=>{i=0;show();d.showModal()};
+$('#nx').onclick=()=>{if(++i>=T.length)d.close();else show()};d.onclick=e=>e.target===d&&d.close();
+</script></body></html>
